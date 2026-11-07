@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html { scroll-behavior: smooth; }
+body { @apply bg-ivory text-charcoal font-sans antialiased; }
+:focus-visible { outline: 2px solid #AC755B; outline-offset: 3px; }
+.h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(2.75rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -0.01em; }
+.h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(2rem, 4.5vw, 3.5rem); line-height: 1.08; }
+.lead { font-size: 1.125rem; line-height: 1.7; max-width: 34rem; }
+.wrap { @apply mx-auto w-full max-w-[1280px] px-5 md:px-10; }
+.btn { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded px-6 text-[0.95rem] font-semibold transition-colors duration-200; }
+.btn-primary { @apply bg-forest text-ivory hover:bg-charcoal; }
+.btn-light { @apply bg-ivory text-forest hover:bg-white; }
+.btn-line { @apply border border-forest text-forest hover:bg-forest hover:text-ivory; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes settle { from { transform: scale(1.06); } to { transform: scale(1); } }
+.anim-rise { animation: rise 1.1s cubic-bezier(.16,.84,.3,1) both; }
+.anim-settle { animation: settle 2.4s cubic-bezier(.2,.7,.2,1) both; }
+/* Hero: bottom-to-top scrim keeps text readable; on phones the photo is wider than the screen and drifts slowly so all of it is seen. */
+.hero-scrim { background: linear-gradient(to top, rgba(41,42,37,.9) 0%, rgba(41,42,37,.72) 30%, rgba(41,42,37,.3) 60%, rgba(41,42,37,.1) 100%); }
+.hero-top { background: linear-gradient(to bottom, rgba(41,42,37,.5), rgba(41,42,37,0)); }
+.hero-text { text-shadow: 0 1px 22px rgba(41,42,37,.5); }
+.hero-pan { position: absolute; top: 0; bottom: 0; left: 0; width: 100%; will-change: transform; backface-visibility: hidden; }
+@media (min-width: 768px) {
+  .hero-scrim { background: linear-gradient(to top, rgba(41,42,37,.82) 0%, rgba(41,42,37,.5) 38%, rgba(41,42,37,.12) 75%, rgba(41,42,37,.18) 100%); }
+}
+@media (max-width: 767px) {
+  .hero-pan { width: max(100vw, 150vh); width: max(100vw, 150svh); transform: translate3d(calc((100vw - max(100vw, 150svh)) / 2), 0, 0); animation: pan 32s cubic-bezier(.45,0,.55,1) 1.2s infinite alternate both; }
+}
+@keyframes pan { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(calc(100vw - max(100vw, 150svh)), 0, 0); } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+}
